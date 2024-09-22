@@ -1,0 +1,62 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class WordCounter extends JFrame implements ActionListener {
+
+    // Declare components
+    private JTextArea textArea;
+    private JButton countButton;
+    private JLabel resultLabel;
+
+    // Constructor to set up the GUI
+    public WordCounter() {
+        // Set the title of the window
+        setTitle("Word Counter Application");
+
+        // Initialize the components
+        textArea = new JTextArea(10, 30);  // Text area for input
+        countButton = new JButton("Count Words");  // Button to trigger counting
+        resultLabel = new JLabel("Word Count: 0");  // Label to show result
+
+        // Set layout of the frame
+        setLayout(new BorderLayout());
+
+        // Add components to the frame
+        add(new JScrollPane(textArea), BorderLayout.CENTER);  // Text area in the center
+        add(countButton, BorderLayout.SOUTH);  // Button at the bottom
+        add(resultLabel, BorderLayout.NORTH);  // Label at the top
+
+        // Add action listener to the button
+        countButton.addActionListener(this);
+
+        // Set frame properties
+        setSize(400, 300);  // Size of the frame
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Exit the application on close
+        setVisible(true);  // Make the frame visible
+    }
+
+    // Method that is triggered when the button is clicked
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Get the text from the text area
+        String inputText = textArea.getText().trim();
+
+        // If the text area is not empty, count the words
+        if (!inputText.isEmpty()) {
+            // Split the input text by spaces or new lines to count words
+            String[] words = inputText.split("\\s+");
+            resultLabel.setText("Word Count: " + words.length);
+        } else {
+            // If the text area is empty, set the word count to 0
+            resultLabel.setText("Word Count: 0");
+        }
+    }
+
+    // Main method to run the application
+    public static void main(String[] args) {
+        // Create an instance of the WordCounter class
+        new WordCounter();
+    }
+}
